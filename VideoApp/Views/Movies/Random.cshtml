@@ -1,9 +1,27 @@
-﻿@model VideoApp.Models.Movie
+﻿@model VideoApp.ViewModels.RandomViewModel
 
 @{
     ViewBag.Title = "Random";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
+@{ 
+    var className = Model.Customers.Count > 2 ? "popular" : null;
+}
 
+@*Dyanamically render a class name using Razor*@
+<h2 class="@className">@Model.Movie.Name</h2>
+
+@if ( Model.Customers.Count == 2)
+{
+    <text>There are no rented movies to show!!!</text>
+}
+else
+{
+    <ul>
+        @foreach(var cust in Model.Customers)
+        {
+            <li>@cust.Name</li>
+        }
+    </ul>
+}

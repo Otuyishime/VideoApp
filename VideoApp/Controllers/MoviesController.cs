@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VideoApp.Models;
+using VideoApp.ViewModels;
 
 namespace VideoApp.Controllers
 {
@@ -13,7 +14,23 @@ namespace VideoApp.Controllers
         public ActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek!" };
-            return View(movie); // pass the movie model to the view ( the Random view)
+
+            // Create a list of customers
+            var customers = new List<Customer>
+            {
+                new Customer {Name = "Customer 1" },
+                new Customer {Name = "Customer 2" }
+            };
+
+            // Create a view model object to help pass the data to the view
+            var viewModel = new RandomViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
+
+
+            return View(viewModel); // pass the movie model to the view ( the Random view)
         }
 
         [Route("movies/released/{year}/{month}")]
